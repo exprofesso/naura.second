@@ -11,36 +11,29 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@Controller
+//@Controller
 
-//@EnableWebMvc
-//@Configuration
+@EnableWebMvc
+@Configuration
 public class HomeController implements WebMvcConfigurer {
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
-
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
-
-
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("hello");
+//
+//    @GetMapping("/hello")
+//    public String hello() {
+//        return "hello";
 //    }
 //
-//    @Bean
-//    public ViewResolver viewResolver() {
-//        InternalResourceViewResolver bean = new InternalResourceViewResolver();
-//
-//        bean.setViewClass(JstlView.class);
-//        bean.setPrefix("/WEB-INF/view/");
-//        bean.setSuffix(".jsp");
-//
-//        return bean;
+//    @GetMapping("/home")
+//    public String home() {
+//        return "home";
 //    }
+
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/hello").setViewName("hello");
+   //     registry.addViewController("/login").setViewName("login");
+    }
+
 }
