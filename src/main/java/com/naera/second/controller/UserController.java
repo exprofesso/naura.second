@@ -2,16 +2,15 @@ package com.naera.second.controller;
 
 import com.naera.second.model.User;
 import com.naera.second.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
+//@RestController
+@Controller
 public class UserController {
-    //    private final UserService userService;
+    //        private final UserService userService;
 //
 //    @Autowired
 //    public UserController(UserService userService) {
@@ -62,45 +61,62 @@ public class UserController {
 //                ? new ResponseEntity<>(HttpStatus.OK)
 //                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
 //    }
-    @Autowired
-    UserService userService;
+//    @Autowired
+//    UserService userService;
+//
+//    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+//    public @ResponseBody
+//    Optional<User> getAllUsers(@PathVariable Integer id) {
+//        return userService.getById(id);
+//    }
+//
+//    @RequestMapping(value = "/users/{name}", method = RequestMethod.GET)
+//    public List<User> getUserByName(@PathVariable String name) {
+//        return userService.findByName(name);
+//    }
+//
+//    @RequestMapping(value = "/users", method = RequestMethod.GET)
+//    public List<User> getAll() {
+//        return userService.getAllUser();
+//    }
+//
+//    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
+//    public HttpStatus deleteUsers(@PathVariable Integer id) {
+//        userService.deleteUser(id);
+//        return HttpStatus.NO_CONTENT;
+//    }
+//
+//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+//    public HttpStatus insertUsers(@RequestBody User user) {
+//        return userService.addUser(user) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
+//    }
+//
+//    // пока не знаю как
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public String login() {
+//        return "Login";
+//    }
+//
+//
+//    @RequestMapping(value = "/users", method = RequestMethod.PUT)
+//    public HttpStatus updateUsers(@RequestBody User user) {
+//        return userService.updateUser(user) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
+//    }
+    private UserService userService;
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    Optional<User> getAllUsers(@PathVariable Integer id) {
-        return userService.getById(id);
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    public ModelAndView login() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
-    @RequestMapping(value = "/users/{name}", method = RequestMethod.GET)
-    public List<User> getUserByName(@PathVariable String name) {
-        return userService.findByName(name);
-    }
-
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public List<User> getAll() {
-        return userService.getAllUser();
-    }
-
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public HttpStatus deleteUsers(@PathVariable Integer id) {
-        userService.deleteUser(id);
-        return HttpStatus.NO_CONTENT;
-    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public HttpStatus insertUsers(@RequestBody User user) {
-        return userService.addUser(user) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
-    }
-
-    // пока не знаю как
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "Login";
-    }
-
-
-    @RequestMapping(value = "/users", method = RequestMethod.PUT)
-    public HttpStatus updateUsers(@RequestBody User user) {
-        return userService.updateUser(user) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public ModelAndView registration() {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = new User();
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("registration");
+        return modelAndView;
     }
 }
