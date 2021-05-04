@@ -3,9 +3,8 @@ package com.naera.second.service;
 import com.naera.second.model.User;
 
 public interface UserService {
-    void saveUser(User user);
-
-    void findUserByEmail(String email);
+    public User findUserByEmail(String email);
+    public void saveUser(User user);
 
 
 //    List<User> readAll();
