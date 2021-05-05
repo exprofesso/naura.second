@@ -4,34 +4,46 @@ import com.naera.second.model.Role;
 import com.naera.second.model.User;
 import com.naera.second.repository.RoleRepository;
 import com.naera.second.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
+
+    @Autowired
    private UserRepository userRepository;
-
-   private   RoleRepository roleRepository;
-
+//    @Autowired
+   private RoleRepository roleRepository;
+ //   @Autowired
    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActivation(1);
-
-  //      Role role = (Role) roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<>(roleRepository.findByRole("ADMIN")));
+        user.setActivation(true);
+      Role userRole = roleRepository.findByRole("ADMIN");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
 
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
-
     }
     ////    private static final Map<Integer, User> USER_MAP = new HashMap<>();
 ////

@@ -3,31 +3,36 @@ package com.naera.second.model;
 import javax.persistence.*;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.Transient;
+
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID")
+    @Column(name = "user_id")
     private Integer id;
 
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "ACTIVE")
-    private Integer activation;
+    @Column(name = "active")
+    private boolean activation;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;  // emptySet() не понятно зачем
 
     public Integer getId() {
@@ -70,11 +75,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getActivation() {
+    public boolean getActivation() {
         return activation;
     }
 
-    public void setActivation(Integer activation) {
+    public void setActivation(boolean activation) {
         this.activation = activation;
     }
 

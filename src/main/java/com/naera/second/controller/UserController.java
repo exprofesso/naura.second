@@ -2,6 +2,7 @@ package com.naera.second.controller;
 
 import com.naera.second.model.User;
 import com.naera.second.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -105,6 +106,8 @@ public class UserController {
 //    public HttpStatus updateUsers(@RequestBody User user) {
 //        return userService.updateUser(user) ? HttpStatus.ACCEPTED : HttpStatus.BAD_REQUEST;
 //    }
+
+//    @Autowired
     private UserService userService;
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
