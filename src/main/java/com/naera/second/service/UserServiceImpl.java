@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
    private UserRepository userRepository;
 //    @Autowired
    private RoleRepository roleRepository;
- //   @Autowired
+//    @Autowired
    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override

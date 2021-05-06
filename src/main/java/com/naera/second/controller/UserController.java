@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+
 //@RestController
 @Controller
 public class UserController {
@@ -128,7 +130,7 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
 
-    public ModelAndView createNewUser(User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
 
         User userExists = userService.findUserByEmail(user.getEmail());
